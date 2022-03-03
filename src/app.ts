@@ -11,7 +11,9 @@ app.use(bodyParser.json())
 app.use(cors())
 
 import TodoModule from './modules/todo/todo.module'
+import UserModule from './modules/user/user.module'
 
 app.use('/todo', TodoModule)
+app.use('/user', UserModule)
 
 app.listen(env.PORT, () => console.log(`Server is started at port ${env.PORT}`))
