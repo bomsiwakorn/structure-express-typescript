@@ -30,10 +30,10 @@ export class TodoController {
 
   public async createTodo(req: Request, res: Response) {
     try {
-      console.log(req.body)
+      console.log('createTodoController -> ', req.body)
       return res.status(HttpStatus.OK).json({ message: req.body })
     } catch (error) {
-      console.log(error)
+      console.log('error ->', error)
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }

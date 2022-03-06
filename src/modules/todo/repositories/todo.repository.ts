@@ -1,4 +1,4 @@
-import { query } from '../../../helper/query'
+import { query } from '../../../services/query.service'
 
 export class TodoRepository {
   public async create() {

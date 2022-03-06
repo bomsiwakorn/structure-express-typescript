@@ -1,19 +1,41 @@
+import 'reflect-metadata'
+
 import express, { Application } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { env } from './config/environment'
 
-const app: Application = express()
+import { AuthMiddleware } from './middleware/auth.middlware'
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-app.use(cors())
-
+import AuthModule from './modules/auth/auth.module'
 import TodoModule from './modules/todo/todo.module'
-import UserModule from './modules/user/user.module'
+class Server {
+  private app: Application
 
-app.use('/todo', TodoModule)
-app.use('/user', UserModule)
+  constructor() {
+    this.app = express()
+    this.configuration()
+    this.moduleRegistry()
+  }
 
-app.listen(env.PORT, () => console.log(`Server is started at port ${env.PORT}`))
+  public start() {
+    this.app.listen(env.PORT, () =>
+      console.log(`Server is started at port ${env.PORT}`)
+    )
+  }
+
+  private configuration() {
+    this.app.use(bodyParser.urlencoded({ extended: false }))
+    this.app.use(bodyParser.json())
+
+    this.app.use(cors())
+  }
+
+  private moduleRegistry() {
+    this.app.use('/auth', AuthModule)
+    this.app.use('/todo', AuthMiddleware, TodoModule)
+  }
+}
+
+const server = new Server()
+server.start()
