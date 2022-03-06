@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      SERVICE_VERSION: v1
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=b0846485675.
+      - MYSQL_PASSWORD=Bom0846485675.
+      - MYSQL_USER=bomsiwakorn
+      - MYSQL_DATABASE=test

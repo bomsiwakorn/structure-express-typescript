@@ -9,7 +9,7 @@ export class Connection {
       password: env.DB_PASSWORD,
       database: env.DB_DATABASE,
       entities: ['src/modules/**/entities/*.entity{.ts,.js}'],
-      logging: true,
+      logging: false,
       synchronize: true,
     })
   }

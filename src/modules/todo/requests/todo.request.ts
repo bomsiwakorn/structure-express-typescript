@@ -1,6 +1,8 @@
-import { body } from 'express-validator'
+import { IsString } from 'class-validator'
+export class CreateTodoRequest {
+  @IsString()
+  title: string
 
-export const validateRequestTodo = [
-  body('title').not().isEmpty().isLength({ min: 6 }),
-  body('description').not().isEmpty().isLength({ min: 6 }),
-]
+  @IsString()
+  description: string
+}
